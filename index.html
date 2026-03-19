@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio | Shuo Huang</title>
+    <meta
+      name="description"
+      content="Shuo Huang - Hands-on Computer Science student at NCKU with project and research experience."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg-shape bg-shape-1" aria-hidden="true"></div>
+    <div class="bg-shape bg-shape-2" aria-hidden="true"></div>
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    <header class="site-header container">
+      <a class="logo" href="#top">Shuo Huang</a>
+      <nav class="site-nav" aria-label="Main Navigation">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#publication">Publication</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top" class="container">
+      <section class="hero reveal">
+        <p class="eyebrow">PERSONAL PORTFOLIO</p>
+        <h1>
+          Shuo Huang<br />
+          <span class="highlight">Hands-on Computer Science Student</span>
+        </h1>
+        <p class="hero-subtitle">
+          I am a CS student at National Cheng Kung University (NCKU) with hands-on experience in software
+          development, research-driven prototyping, and security-oriented AI system research.
+        </p>
+        <ul class="hero-meta">
+          <li>Taipei / Tainan, Taiwan</li>
+          <li>Bachelor of Computer Science and Information Engineering, NCKU (Expected Jun 2027)</li>
+        </ul>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">View Project</a>
+          <a class="btn btn-secondary" href="#contact">Get in Touch</a>
+        </div>
+      </section>
+
+      <section id="about" class="card reveal">
+        <h2>About</h2>
+        <p>
+          I am currently a junior preparing to enter senior year. I have solid CS coursework foundations, hands-on
+          project experience in both team and individual settings, and undergraduate research experience. I am currently
+          focused on backend engineering and systems-oriented development.
+        </p>
+      </section>
+
+      <section id="experience" class="card reveal">
+        <h2>Experience</h2>
+        <ol class="timeline">
+          <li>
+            <strong>Software Engineering & Intelligent Automated Testing Lab, NCKU</strong>
+            <p>Undergraduate Research Assistant - Secure AI Agent Architecture</p>
+            <p>Apr 2025 - Dec 2025 | Tainan, Taiwan</p>
+            <p>
+              Tech Stack: Python, Google Agent Development Kit (ADK), Docker, LLM Security
+            </p>
+            <ul>
+              <li>
+                Implemented an experimental prompt-injection defense plugin in Google ADK, separating a privileged
+                planner (P-LLM) from a quarantined parser (Q-LLM).
+              </li>
+              <li>
+                Designed an ADK callback-based security boundary where untrusted tool outputs are translated to UUID
+                keys, parsed with schema constraints, and only validated fields are returned to the planner.
+              </li>
+              <li>
+                Reimplemented AgentDojo-style evaluation environments and improved secure task completion from 26%
+                (7/27) to 70% (19/27) under adversarial prompt-injection testing.
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <section id="projects" class="reveal">
+        <div class="section-title-row">
+          <h2>Projects</h2>
+        </div>
+        <h3 class="projects-subtitle">Featured Projects</h3>
+        <div class="project-grid featured-projects">
+          <article class="project-card project-card-featured featured-card">
+            <div class="project-preview">
+              <img src="./projects/system.png" alt="Dual-LLM project architecture preview." />
+            </div>
+            <h3>Bringing the Dual-LLM Pattern to Practice in Google ADK</h3>
+            <p class="project-subtitle">Deterministic AI Agent Security Against Prompt Injection</p>
+            <p class="project-summary">Dual-LLM boundary implementation in Google ADK, improving secure completion from 7/27 to 19/27 adversarial cases.</p>
+            <div class="project-tags">
+              <span class="tag"><span class="tag-dot"></span>LLM Security</span>
+              <span class="tag"><span class="tag-dot"></span>Google ADK</span>
+              <span class="tag"><span class="tag-dot"></span>Prompt Injection Defense</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-primary" href="./projects/dual-llm-adk.html">View Details</a>
+              <a class="btn btn-secondary" href="https://github.com/F64116045/Bringing-the-Dual-LLM-Pattern-to-Practice-in-Google-ADK" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </article>
+
+          <article class="project-card project-card-featured featured-card">
+            <div class="project-preview">
+              <img src="./projects/identity-dashboard.png" alt="Identity and Auth Service observability dashboard preview." />
+            </div>
+            <h3>Identity and Auth Service</h3>
+            <p class="project-subtitle">FastAPI-Based Identity and Authentication Service for Microservices</p>
+            <p class="project-summary">Centralized auth backend with JWT RS256, first-party password/refresh token flow, Google OAuth login (PKCE), Redis rate limiting/blacklist, and full observability.</p>
+            <div class="project-tags">
+              <span class="tag"><span class="tag-dot"></span>FastAPI</span>
+              <span class="tag"><span class="tag-dot"></span>JWT</span>
+              <span class="tag"><span class="tag-dot"></span>PostgreSQL</span>
+              <span class="tag"><span class="tag-dot"></span>Redis</span>
+              <span class="tag"><span class="tag-dot"></span>Docker</span>
+              <span class="tag"><span class="tag-dot"></span>Auth Service</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-primary" href="./projects/identity-service.html">View Details</a>
+              <a class="btn btn-secondary" href="https://github.com/F64116045/Identity-Service" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </article>
+        </div>
+
+        <h3 class="projects-subtitle additional-title">Additional Projects</h3>
+        <div class="project-grid additional-projects">
+          <article class="project-card project-card-featured project-card-mini">
+            <div class="project-preview">
+              <img src="./projects/pic18-waiting.png" alt="PIC18F project preview image." />
+            </div>
+            <h3>PIC18F Interactive Gaming System</h3>
+            <p class="project-summary">PIC18F4520 game engine + Python Pygame host with custom UART packets for real-time bidirectional interaction.</p>
+            <div class="project-tags">
+              <span class="tag"><span class="tag-dot"></span>C</span>
+              <span class="tag"><span class="tag-dot"></span>MCU</span>
+              <span class="tag"><span class="tag-dot"></span>PIC18F4520</span>
+              <span class="tag"><span class="tag-dot"></span>UART</span>
+              <span class="tag"><span class="tag-dot"></span>Pygame</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-primary" href="./projects/pic18f-gaming-system.html">View Details</a>
+              <a class="btn btn-secondary" href="https://github.com/F64116045/2025_Microcontroller_Final_Proj" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </article>
+
+          <article class="project-card project-card-featured project-card-mini">
+            <div class="project-preview">
+              <img src="./projects/streamlog-home.png" alt="Streamlog homepage preview." />
+            </div>
+            <h3>Streamlog</h3>
+            <p class="project-summary">Movie logging and sharing platform with notes, favorites, and annual review analytics from user watch behavior.</p>
+            <div class="project-tags">
+              <span class="tag"><span class="tag-dot"></span>Flask</span>
+              <span class="tag"><span class="tag-dot"></span>MySQL</span>
+              <span class="tag"><span class="tag-dot"></span>Data Visualization</span>
+            </div>
+            <div class="project-links">
+              <a class="btn btn-primary" href="./projects/streamlog.html">View Details</a>
+              <a class="btn btn-secondary" href="https://github.com/1109lun/streamlog" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="publication" class="card reveal">
+        <h2>Publication</h2>
+        <p>
+          <strong>Bringing the Dual-LLM Pattern to Practice in Google ADK for Deterministic AI Agent Security against Prompt Injection</strong>
+        </p>
+        <p>
+          Presented at the
+          <a href="https://isarob.org/symposium/" target="_blank" rel="noreferrer">31st International Symposium on Artificial Life and Robotics (ISAROB 2026)</a>.
+        </p>
+        <p>Authors: Huang Shuo, Shin-Jie Lee</p>
+        <p>Affiliation: Department of Computer Science and Information Engineering, National Cheng Kung University, Tainan, Taiwan</p>
+      </section>
+
+      <section id="education" class="card reveal">
+        <h2>Education</h2>
+        <ol class="timeline">
+          <li>
+            <strong>National Cheng Kung University (NCKU)</strong>
+            <p>Bachelor of Computer Science and Information Engineering</p>
+            <p>Sep 2022 - Jun 2027 (Expected) | Tainan, Taiwan</p>
+            <p>GPA: 3.96 / 4.3</p>
+          </li>
+          <li>
+            <strong>Relevant Coursework</strong>
+            <p>Data Structures (A-), Algorithms (A+), Operating Systems (A-)</p>
+            <p>Computer Organization (A+), Database Systems (A+)</p>
+          </li>
+          <li>
+            <strong>CPE (Collegiate Programming Examination)</strong>
+            <p>A (Professional Level), Top 8.3% (4/7 solved)</p>
+          </li>
+        </ol>
+        <p class="project-actions">
+          <a class="btn btn-secondary" href="./coursework.html">View Full Coursework</a>
+        </p>
+      </section>
+
+      <section id="contact" class="card reveal">
+        <h2>Contact</h2>
+        <p>I am open to internship and research collaboration opportunities.</p>
+        <ul class="contact-list">
+          <li>Phone: 0970-634-886</li>
+          <li>Email: F64116045@gs.ncku.edu.tw</li>
+          <li>
+            GitHub:
+            <a href="https://github.com/F64116045" target="_blank" rel="noreferrer">github.com/F64116045</a>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer container">
+      <p>&copy; <span id="year"></span> Shuo Huang. All rights reserved.</p>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

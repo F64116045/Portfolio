@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project | Identity and Auth Service</title>
+    <meta
+      name="description"
+      content="FastAPI-based identity/authentication service with JWT RS256, first-party password/refresh token flow, Google OAuth login, Redis controls, and observability stack."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="project-page">
+    <div class="bg-shape bg-shape-1" aria-hidden="true"></div>
+    <div class="bg-shape bg-shape-2" aria-hidden="true"></div>
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    <header class="site-header container">
+      <a class="logo" href="../index.html">Shuo Huang</a>
+      <nav class="site-nav" aria-label="Project Navigation">
+        <a href="../index.html#projects">Back to Projects</a>
+        <a href="#overview">Overview</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#api">API Surface</a>
+        <a href="#observability">Observability</a>
+      </nav>
+    </header>
+
+    <main class="container case-study-main">
+      <section class="hero reveal" id="overview">
+        <p class="eyebrow">PROJECT</p>
+        <h1>
+          Identity and Auth Service
+          <span class="highlight">FastAPI-Based Auth Service for Microservices</span>
+        </h1>
+        <p class="hero-subtitle">
+          A practical centralized identity provider focused on secure token flows, user lifecycle management,
+          and backend observability.
+        </p>
+      </section>
+
+      <div class="case-layout">
+        <aside class="card reveal case-aside">
+          <h2>Case Summary</h2>
+          <ul class="contact-list">
+            <li><strong>Type:</strong> Backend Identity and Auth Service</li>
+            <li><strong>Core Stack:</strong> FastAPI, PostgreSQL, Redis</li>
+            <li><strong>Auth:</strong> JWT RS256 + first-party password/refresh flow + Google OAuth (PKCE)</li>
+            <li><strong>Security Controls:</strong> Redis rate limiting (slowapi, moving window) + Redis token blacklist</li>
+            <li><strong>Monitoring:</strong> Celery + Flower, Prometheus, Grafana, Loki, Promtail</li>
+          </ul>
+          <p class="project-actions">
+            <a class="btn btn-primary" href="https://github.com/F64116045/Identity-Service" target="_blank" rel="noreferrer">Open Repository</a>
+          </p>
+          <p class="project-actions">
+            <a class="btn btn-secondary" href="../index.html#projects">Back to Portfolio</a>
+          </p>
+        </aside>
+
+        <div class="case-content">
+          <section class="card reveal case-section" id="capabilities" data-step="01">
+            <h2>What This Project Provides</h2>
+            <ul>
+              <li>Centralized identity provider with registration and user lifecycle management</li>
+              <li>Argon2 password hashing and administrative auditing APIs</li>
+              <li>JWT authentication with RS256 (RSA key pair)</li>
+              <li>JWKS endpoint for public-key-based token verification across microservices</li>
+              <li>First-party password login and refresh-token flow for internal clients</li>
+              <li>Google OAuth login with PKCE/state validation</li>
+              <li>User self-service APIs and admin user management APIs</li>
+              <li>Redis-backed rate limiting via slowapi (moving window strategy)</li>
+              <li>Redis-backed access-token blacklist for logout/session invalidation</li>
+              <li>Celery-based background email tasks with Flower monitoring</li>
+              <li>Observability stack with Prometheus, Grafana, Loki, and Promtail</li>
+            </ul>
+          </section>
+
+          <section class="card reveal case-section" id="architecture" data-step="02">
+            <h2>Runtime Architecture</h2>
+            <p>
+              The service is designed for practical local deployment: Nginx terminates TLS and routes
+              requests to identity-auth and identity-api services, while Redis and PostgreSQL back authentication,
+              state, and persistence.
+            </p>
+            <ol class="timeline">
+              <li>
+                <strong>Authentication Request Flow</strong>
+                <p>User authenticates via first-party password flow or Google OAuth.</p>
+                <p>Access token is issued (RS256 JWT), refresh token is stored in HttpOnly cookie.</p>
+                <p>Logout revokes tokens through Redis blacklist checks.</p>
+                <p>Microservices validate JWTs locally via JWKS public keys without sharing signing credentials.</p>
+              </li>
+              <li>
+                <strong>Observability Flow</strong>
+                <p>FastAPI and Redis metrics are scraped by Prometheus.</p>
+                <p>Container logs are collected by Promtail and queried in Loki.</p>
+                <p>Grafana dashboards visualize metrics and logs from the PLG stack.</p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="card reveal case-section" id="api" data-step="03">
+            <h2>API Surface</h2>
+            <p><strong>Auth endpoints</strong>: login, refresh, logout, Google login/callback, password recovery/reset, email verification, change password.</p>
+            <p><strong>User endpoints</strong>: register, get current user, update profile, delete account.</p>
+            <p><strong>Admin endpoints</strong>: list/get/update/delete users with self-delete protection.</p>
+            <p><strong>Discovery endpoint</strong>: JWKS for inter-service token verification.</p>
+            <p>
+              The API design emphasizes practical backend identity and auth operations rather than standards-complete
+              identity-provider features.
+            </p>
+          </section>
+
+          <section class="card reveal case-section" id="observability" data-step="04">
+            <h2>Monitoring, Testing, and Auditability</h2>
+            <figure class="architecture-figure">
+              <img src="./identity-dashboard.png" alt="Identity service observability dashboard." />
+              <figcaption>Dashboard view for authentication metrics and service observability.</figcaption>
+            </figure>
+            <ul>
+              <li>Docker Compose orchestrates Nginx, API services, PostgreSQL, Redis, Celery, Flower, Prometheus, Grafana, Loki, Promtail.</li>
+              <li>k6 load-test scripts are included for auth throughput and latency profiling.</li>
+              <li>Rate limiting is implemented with slowapi + Redis using a moving-window strategy and can be globally toggled via environment configuration.</li>
+              <li>Loki is used for high-volume runtime logs; SQL audit table keeps durable actor/target/request trails.</li>
+              <li>Email verification workflows are offloaded to Celery, while Flower is used to monitor task status and worker health.</li>
+            </ul>
+          </section>
+
+          <section class="card reveal case-section" data-step="05">
+            <h2>Tech Stack</h2>
+            <p>
+              Python 3.12, FastAPI, SQLAlchemy 2.x, Pydantic v2, PostgreSQL, Redis, Celery, Flower,
+              Prometheus, Grafana, Loki, Promtail, Docker Compose.
+            </p>
+          </section>
+
+          <section class="card reveal case-section" data-step="06">
+            <h2>Project Notes</h2>
+            <p>
+              JWT signing depends on local RSA key files, and local HTTPS setup depends on generated self-signed
+              certificates for Nginx. Some features also depend on external integration credentials (such as Google OAuth
+              and SMTP).
+            </p>
+            <p>
+              This project focuses on practical backend identity/auth implementation for first-party services.
+            </p>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer container">
+      <p>&copy; <span id="year"></span> Shuo Huang. All rights reserved.</p>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

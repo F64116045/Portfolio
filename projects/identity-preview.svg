@@ -1,0 +1,19 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="960" y2="540" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EEF4FF"/>
+      <stop offset="1" stop-color="#DCEBFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" rx="24" fill="url(#bg)"/>
+  <rect x="88" y="84" width="784" height="372" rx="20" fill="#FFFFFF" stroke="#C7DAFA" stroke-width="2"/>
+  <rect x="128" y="132" width="300" height="40" rx="10" fill="#1F6FEB" fill-opacity="0.12"/>
+  <rect x="128" y="190" width="704" height="24" rx="8" fill="#1F6FEB" fill-opacity="0.10"/>
+  <rect x="128" y="226" width="704" height="24" rx="8" fill="#1F6FEB" fill-opacity="0.10"/>
+  <rect x="128" y="262" width="704" height="24" rx="8" fill="#1F6FEB" fill-opacity="0.10"/>
+  <rect x="128" y="324" width="180" height="52" rx="14" fill="#1F6FEB"/>
+  <rect x="330" y="324" width="180" height="52" rx="14" fill="#EAF1FF" stroke="#AFC8F7"/>
+  <text x="128" y="110" fill="#1A3761" font-family="Arial, sans-serif" font-size="28" font-weight="700">Identity and Auth Service</text>
+  <text x="140" y="357" fill="white" font-family="Arial, sans-serif" font-size="20" font-weight="700">JWT / OAuth</text>
+  <text x="357" y="357" fill="#1A3761" font-family="Arial, sans-serif" font-size="20" font-weight="700">Observability</text>
+</svg>

@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Case Study | PIC18F Interactive Gaming System</title>
+    <meta
+      name="description"
+      content="Case study: PIC18F4520 + Python Pygame interactive gaming system with custom UART protocol and real-time MCU-PC integration."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="project-page">
+    <div class="bg-shape bg-shape-1" aria-hidden="true"></div>
+    <div class="bg-shape bg-shape-2" aria-hidden="true"></div>
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    <header class="site-header container">
+      <a class="logo" href="../index.html">Shuo Huang</a>
+      <nav class="site-nav" aria-label="Project Navigation">
+        <a href="../index.html#projects">Back to Projects</a>
+        <a href="#overview">Overview</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#protocol">Protocol</a>
+        <a href="#games">Games</a>
+        <a href="#screens">Screens</a>
+        <a href="#contribution">My Contribution</a>
+      </nav>
+    </header>
+
+    <main class="container case-study-main">
+      <section class="hero reveal" id="overview">
+        <p class="eyebrow">PROJECT CASE STUDY</p>
+        <h1>
+          PIC18F Interactive Gaming System
+          <span class="highlight">Microcontroller Final Project</span>
+        </h1>
+        <p class="hero-subtitle">
+          A complete real-time gaming platform co-designed across embedded firmware (PIC18F4520) and PC host software
+          (Python + Pygame), synchronized through a custom UART communication protocol.
+        </p>
+      </section>
+
+      <div class="case-layout">
+        <aside class="card reveal case-aside">
+          <h2>Case Summary</h2>
+          <ul class="contact-list">
+            <li><strong>MCU:</strong> PIC18F4520</li>
+            <li><strong>Host:</strong> Python, Pygame, PySerial</li>
+            <li><strong>Comms:</strong> UART 9600 bps, custom packet framing</li>
+            <li><strong>Outcome:</strong> Stable real-time bidirectional gameplay interaction</li>
+          </ul>
+          <p class="project-actions">
+            <a class="btn btn-primary" href="https://github.com/F64116045/2025_Microcontroller_Final_Proj" target="_blank" rel="noreferrer">Open Repository</a>
+          </p>
+          <p class="project-actions">
+            <a class="btn btn-secondary" href="https://youtu.be/KkOgY3i2P5E?si=V11hNVUlSkZitN6m" target="_blank" rel="noreferrer">Watch Demo Video</a>
+          </p>
+          <p class="project-actions">
+            <a class="btn btn-secondary" href="../index.html#projects">Back to Portfolio</a>
+          </p>
+        </aside>
+
+        <div class="case-content">
+          <section class="card reveal case-section" id="architecture" data-step="01">
+            <h2>System Architecture</h2>
+            <p>
+              The system follows a clear hardware-software split: PIC18F4520 is the real-time decision core,
+              while the PC host acts as a visualization and audio layer.
+            </p>
+            <ul>
+              <li><strong>Firmware side (PIC18F):</strong> Nested interrupt handling, peripheral control (ADC, Timer, External Interrupts, UART), and FSM-driven game logic.</li>
+              <li><strong>Host side (PC):</strong> Multithreaded producer-consumer design to decouple serial I/O from rendering and maintain smooth 60 FPS display updates.</li>
+              <li><strong>Design principle:</strong> PIC is the game brain. PC does passive rendering only, with no authority over win/loss rules.</li>
+            </ul>
+          </section>
+
+          <section class="card reveal case-section" id="protocol" data-step="02">
+            <h2>UART Protocol Design</h2>
+            <p>
+              To guarantee robust state synchronization, the project uses a custom ASCII packet protocol instead of
+              simple one-byte signaling.
+            </p>
+            <ul>
+              <li><strong>Physical layer:</strong> UART, 9600 bps</li>
+              <li><strong>Packet frame:</strong> <code>$&lt;HEADER&gt;,&lt;DATA...&gt;*</code></li>
+              <li><strong>Delimiters:</strong> start <code>$</code>, end <code>*</code>, separator <code>,</code></li>
+              <li><strong>Message groups:</strong> <code>$HINT</code>, <code>$TTT</code>, <code>$REACT</code>, <code>$WAM</code>, <code>$END</code></li>
+              <li><strong>Reliability:</strong> UART overrun recovery via <code>OERR</code> detection and <code>CREN</code> reset logic</li>
+            </ul>
+            <p>
+              Detailed protocol documentation:
+              <a href="https://github.com/F64116045/2025_Microcontroller_Final_Proj/blob/main/Docs/Protocol.md" target="_blank" rel="noreferrer">
+                Docs/Protocol.md
+              </a>
+            </p>
+          </section>
+
+          <section class="card reveal case-section" id="games" data-step="03">
+            <h2>Game Modes and Runtime Logic</h2>
+            <ol class="timeline">
+              <li>
+                <strong>Tic-Tac-Toe</strong>
+                <p>VR input (ADC) controls cursor selection; button confirms placement.</p>
+                <p>PIC computes board updates, win/loss, and draw conditions.</p>
+              </li>
+              <li>
+                <strong>Reaction Game</strong>
+                <p>Two players stop a rapidly changing counter near a target value.</p>
+                <p>PIC evaluates lock timing and scoring precision.</p>
+              </li>
+              <li>
+                <strong>Whac-A-Mole</strong>
+                <p>Players initialize via buttons; host keyboard events are sent over UART.</p>
+                <p>PIC handles hit detection, countdown timing, and score updates.</p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="card reveal case-section" id="screens" data-step="04">
+            <h2>Gameplay Screens</h2>
+            <figure class="architecture-figure">
+              <img src="./pic18-waiting.png" alt="PIC18 waiting and lobby screen." />
+              <figcaption>Waiting / ready screen before entering gameplay.</figcaption>
+            </figure>
+            <figure class="architecture-figure">
+              <img src="./pic18-reaction.png" alt="PIC18 reaction game screen." />
+              <figcaption>Reaction game runtime state.</figcaption>
+            </figure>
+            <figure class="architecture-figure">
+              <img src="./pic18-whac-a-mole.png" alt="PIC18 whac-a-mole game screen." />
+              <figcaption>Whac-a-mole gameplay view.</figcaption>
+            </figure>
+          </section>
+
+          <section class="card reveal case-section" data-step="05">
+            <h2>Embedded Engineering Highlights</h2>
+            <ul>
+              <li>Interrupt priority mode enabled with high/low ISR split for responsiveness.</li>
+              <li>External interrupts (INT0/INT1) for low-latency button input over polling.</li>
+              <li>Software debouncing strategy tuned to avoid unnecessary gameplay latency.</li>
+              <li>Timer2-driven time base for reaction timing and countdown control.</li>
+              <li>Global shared tables (for example, GC_TABLE and WAWO_TABLE) for ISR-main data exchange.</li>
+            </ul>
+          </section>
+
+          <section class="card reveal case-section" id="contribution" data-step="06">
+            <h2>My Contribution</h2>
+            <ul>
+              <li><strong>UART Packet Protocol Design:</strong> Defined packet framing, headers, and synchronization rules for game-state broadcasting.</li>
+              <li><strong>UART Driver Development:</strong> Implemented communication handling and stability mechanisms in firmware runtime.</li>
+              <li><strong>Pygame UI Implementation:</strong> Built host-side interface behavior and rendering logic for responsive gameplay presentation.</li>
+            </ul>
+          </section>
+
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer container">
+      <p>&copy; <span id="year"></span> Shuo Huang. All rights reserved.</p>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Case Study | Dual-LLM in Google ADK</title>
+    <meta
+      name="description"
+      content="Case study: Bringing the Dual-LLM pattern to practice in Google ADK for deterministic prompt-injection defense."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="project-page">
+    <div class="bg-shape bg-shape-1" aria-hidden="true"></div>
+    <div class="bg-shape bg-shape-2" aria-hidden="true"></div>
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    <header class="site-header container">
+      <a class="logo" href="../index.html">Shuo Huang</a>
+      <nav class="site-nav" aria-label="Project Navigation">
+        <a href="../index.html#projects">Back to Projects</a>
+        <a href="#overview">Overview</a>
+        <a href="#abstract">Abstract</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#evaluation">Evaluation</a>
+        <a href="#foundations">Foundations</a>
+        <a href="https://github.com/F64116045/Bringing-the-Dual-LLM-Pattern-to-Practice-in-Google-ADK" target="_blank" rel="noreferrer">Repository</a>
+      </nav>
+    </header>
+
+    <main class="container case-study-main">
+      <section class="hero reveal" id="overview">
+        <p class="eyebrow">PROJECT CASE STUDY</p>
+        <h1>
+          Bringing the Dual-LLM Pattern to Practice in Google ADK
+          <span class="highlight">for Deterministic Prompt-Injection Defense</span>
+        </h1>
+        <p class="hero-subtitle">
+          This project translates security architecture ideas from recent research into an executable, reproducible,
+          and benchmarked implementation for LLM agents.
+        </p>
+      </section>
+
+      <div class="case-layout">
+        <aside class="card reveal case-aside">
+          <h2>Case Summary</h2>
+          <ul class="contact-list">
+            <li><strong>Role:</strong> Undergraduate Research Assistant</li>
+            <li><strong>Timeline:</strong> Apr 2025 - Dec 2025</li>
+            <li><strong>Stack:</strong> Python 3.12, Docker, Google ADK</li>
+            <li><strong>Result:</strong> 7/27 -> 19/27 secure completions</li>
+          </ul>
+          <p class="project-actions">
+            <a class="btn btn-primary" href="https://github.com/F64116045/Bringing-the-Dual-LLM-Pattern-to-Practice-in-Google-ADK" target="_blank" rel="noreferrer">Open Repository</a>
+          </p>
+          <p class="project-actions">
+            <a class="btn btn-secondary" href="../index.html#projects">Back to Portfolio</a>
+          </p>
+        </aside>
+
+        <div class="case-content">
+          <section class="card reveal case-section" id="abstract" data-step="01">
+            <h2>Abstract</h2>
+            <p>
+              Large Language Model (LLM) agents are vulnerable to prompt injection that may trigger unauthorized actions
+              or sensitive data leakage. To move beyond probabilistic filtering, this project implements a deterministic
+              architecture in Google ADK inspired by the Dual-LLM pattern and capability-boundary ideas from CaMeL.
+            </p>
+            <p>
+              The implementation isolates a privileged planner (P-LLM) from a quarantined parser (Q-LLM), replaces
+              untrusted outputs with UUID-based symbolic keys, enforces schema-validated data exchange, and applies
+              pre-tool security checks through ADK callbacks.
+            </p>
+            <p>
+              In 27 replicated adversarial scenarios, secure task completion improved from 7/27 (26%) to 19/27 (70%).
+              This project is an implementation-and-evaluation effort grounded in existing security research, not an
+              ad-hoc architecture invented without prior foundations.
+            </p>
+          </section>
+
+          <section class="card reveal case-section" data-step="02">
+            <h2>Problem Context</h2>
+            <p>
+              LLM-based agents can be manipulated by prompt injection hidden inside tool outputs, emails, web pages, or
+              delegated subtask responses. Standard filtering often behaves probabilistically, which is not enough for
+              deterministic security guarantees in high-risk actions.
+            </p>
+            <p>
+              The core challenge is to prevent untrusted content from directly steering a privileged planner model that can
+              call sensitive tools.
+            </p>
+          </section>
+
+          <section class="card reveal case-section" id="architecture" data-step="03">
+            <h2>System Design</h2>
+            <p>
+              I implemented a Dual-LLM-inspired boundary in Google ADK with strict separation of trusted and untrusted
+              information flows.
+            </p>
+            <figure class="architecture-figure">
+              <img src="./system.png" alt="System architecture diagram showing P-LLM, Q-LLM, key-value translation, and security callback boundary." />
+              <figcaption>System architecture diagram used in this project implementation.</figcaption>
+            </figure>
+            <ol class="timeline">
+              <li>
+                <strong>Privileged LLM (P-LLM)</strong>
+                <p>Responsible for high-level planning and tool execution.</p>
+                <p>Only sees symbolic keys and validated structured fields, never raw untrusted content.</p>
+              </li>
+              <li>
+                <strong>Quarantined LLM (Q-LLM)</strong>
+                <p>Parses untrusted content and handles delegated subtasks via A2A protocol.</p>
+                <p>Returns schema-constrained JSON outputs for controlled downstream use.</p>
+              </li>
+              <li>
+                <strong>Key-Value Translation Plugin</strong>
+                <p>Converts untrusted outputs into UUID-based symbolic handles before context injection.</p>
+                <p>Breaks direct prompt-channel influence from attacker text to privileged planner.</p>
+              </li>
+              <li>
+                <strong>Security Policy Callback</strong>
+                <p>Enforces deterministic capability checks using ADK before tool invocation.</p>
+                <p>Supports policies such as allowlisting and pre-action constraints.</p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="card reveal case-section" id="evaluation" data-step="04">
+            <h2>Evaluation and Results</h2>
+            <p>
+              I recreated representative AgentDojo scenarios in ADK and executed 27 adversarial prompt-injection test
+              cases across multiple environments.
+            </p>
+            <ul>
+              <li>Baseline (without isolation): 7 / 27 secure completions (26%)</li>
+              <li>Dual-LLM architecture: 19 / 27 secure completions (70%)</li>
+            </ul>
+            <p>
+              The remaining failures mostly involved malicious content propagated through delegated subtasks or overreliance
+              on untrusted data, which points to future policy hardening opportunities.
+            </p>
+          </section>
+
+          <section class="card reveal case-section" id="foundations" data-step="05">
+            <h2>Research Foundations and Attribution</h2>
+            <p>
+              This project explicitly builds on prior work from the community and translates those concepts into a
+              runnable Google ADK implementation.
+            </p>
+            <ul>
+              <li>
+                <strong>Dual LLM Pattern</strong>: Conceptual separation between privileged and quarantined reasoning,
+                originally articulated by Simon Willison (2023).
+              </li>
+              <li>
+                <strong>CaMeL Framework</strong>: Capability-based security boundaries that inspired deterministic
+                pre-tool policy enforcement.
+                <a href="https://github.com/google-research/camel-prompt-injection" target="_blank" rel="noreferrer">
+                  (google-research/camel-prompt-injection)
+                </a>
+              </li>
+              <li>
+                <strong>AgentDojo Benchmark</strong>: Attack/defense evaluation methodology and scenarios adapted for ADK
+                replication.
+                <a href="https://github.com/ethz-spylab/agentdojo" target="_blank" rel="noreferrer">
+                  (ethz-spylab/agentdojo)
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          <section class="card reveal case-section" data-step="06">
+            <h2>Publication</h2>
+            <p>
+              <strong>Bringing the Dual-LLM Pattern to Practice in Google ADK for Deterministic AI Agent Security against Prompt Injection</strong>
+            </p>
+            <p>
+              Presented at
+              <a href="https://isarob.org/symposium/" target="_blank" rel="noreferrer">ISAROB 2026 (31st International Symposium on Artificial Life and Robotics)</a>.
+            </p>
+            <p>Authors: Huang Shuo, Shin-Jie Lee</p>
+            <p>Affiliation: Department of Computer Science and Information Engineering, National Cheng Kung University</p>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer container">
+      <p>&copy; <span id="year"></span> Shuo Huang. All rights reserved.</p>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="960" y2="540" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EEF9F5"/>
+      <stop offset="1" stop-color="#D8F2E8"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" rx="24" fill="url(#bg2)"/>
+  <rect x="76" y="72" width="808" height="396" rx="20" fill="#FFFFFF" stroke="#BFE6D8" stroke-width="2"/>
+  <rect x="120" y="116" width="250" height="120" rx="16" fill="#EAF8F2" stroke="#B7E2D3"/>
+  <rect x="404" y="116" width="440" height="120" rx="16" fill="#EAF8F2" stroke="#B7E2D3"/>
+  <rect x="120" y="260" width="724" height="28" rx="8" fill="#0F8B8D" fill-opacity="0.14"/>
+  <rect x="120" y="300" width="724" height="28" rx="8" fill="#0F8B8D" fill-opacity="0.14"/>
+  <rect x="120" y="340" width="724" height="28" rx="8" fill="#0F8B8D" fill-opacity="0.14"/>
+  <text x="120" y="102" fill="#185648" font-family="Arial, sans-serif" font-size="28" font-weight="700">PIC18F Interactive Gaming System</text>
+  <text x="146" y="184" fill="#185648" font-family="Arial, sans-serif" font-size="22" font-weight="700">PIC18F4520</text>
+  <text x="434" y="184" fill="#185648" font-family="Arial, sans-serif" font-size="22" font-weight="700">Python + Pygame Host</text>
+</svg>

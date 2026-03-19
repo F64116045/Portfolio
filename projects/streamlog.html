@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Case Study | Streamlog</title>
+    <meta
+      name="description"
+      content="Case study: Streamlog movie journaling and sharing platform built with Flask, MySQL, and server-rendered frontend architecture."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="project-page">
+    <div class="bg-shape bg-shape-1" aria-hidden="true"></div>
+    <div class="bg-shape bg-shape-2" aria-hidden="true"></div>
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    <header class="site-header container">
+      <a class="logo" href="../index.html">Shuo Huang</a>
+      <nav class="site-nav" aria-label="Project Navigation">
+        <a href="../index.html#projects">Back to Projects</a>
+        <a href="#overview">Overview</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#database">Data Model</a>
+        <a href="#features">Features</a>
+        <a href="#screens">Screens</a>
+        <a href="#contribution">My Contribution</a>
+      </nav>
+    </header>
+
+    <main class="container case-study-main">
+      <section class="hero reveal" id="overview">
+        <p class="eyebrow">PROJECT CASE STUDY</p>
+        <h1>
+          Streamlog
+          <span class="highlight">Movie Journal and Sharing Platform</span>
+        </h1>
+        <p class="hero-subtitle">
+          A full-stack application that helps users record movie experiences, share notes, search watch history,
+          and generate annual movie-review insights.
+        </p>
+      </section>
+
+      <div class="case-layout">
+        <aside class="card reveal case-aside">
+          <h2>Case Summary</h2>
+          <ul class="contact-list">
+            <li><strong>Stack:</strong> Flask, MySQL, Bootstrap</li>
+            <li><strong>Backend Env:</strong> Python 3.11 + Poetry</li>
+            <li><strong>Runtime:</strong> Server-rendered Flask pages</li>
+            <li><strong>Repo:</strong> streamlog (team project)</li>
+          </ul>
+          <p class="project-actions">
+            <a class="btn btn-primary" href="https://github.com/1109lun/streamlog" target="_blank" rel="noreferrer">Open Repository</a>
+          </p>
+          <p class="project-actions">
+            <a class="btn btn-secondary" href="../index.html#projects">Back to Portfolio</a>
+          </p>
+        </aside>
+
+        <div class="case-content">
+          <section class="card reveal case-section" id="architecture" data-step="01">
+            <h2>System Architecture</h2>
+            <p>
+              Streamlog follows a straightforward web architecture:
+            </p>
+            <ul>
+              <li><strong>Client:</strong> HTML + Bootstrap pages for form operations and queries</li>
+              <li><strong>Web Server:</strong> Flask handles routing, business logic, and template rendering</li>
+              <li><strong>Database:</strong> MySQL stores user, movie, watchlog, and note-related entities</li>
+              <li><strong>Chart Layer:</strong> Aggregated yearly data is transformed into visual and statistical summaries</li>
+            </ul>
+            <p>
+              Development flow uses Poetry-managed backend dependencies and local MySQL initialization via schema SQL.
+            </p>
+          </section>
+
+          <section class="card reveal case-section" id="database" data-step="02">
+            <h2>Core Data Model</h2>
+            <p>
+              The platform data model is designed around movie tracking, note sharing, and user interactions.
+            </p>
+            <ul>
+              <li><strong>User:</strong> profile/auth info (user_name, email, password, age)</li>
+              <li><strong>Movie:</strong> title metadata (genre, duration, release year, rating, image URL)</li>
+              <li><strong>WatchLog:</strong> user-to-movie viewing records with mood and rating</li>
+              <li><strong>UserNote:</strong> long-form review content with created timestamp</li>
+              <li><strong>NoteLike / MovieFavorite:</strong> interaction and preference mapping tables</li>
+            </ul>
+          </section>
+
+          <section class="card reveal case-section" id="features" data-step="03">
+            <h2>Core Product Features</h2>
+            <ol class="timeline">
+              <li>
+                <strong>User Flow</strong>
+                <p>Register, login, logout, and session-based authenticated navigation.</p>
+              </li>
+              <li>
+                <strong>Movie Journaling</strong>
+                <p>Create and manage watch logs and movie notes through CRUD-style pages.</p>
+              </li>
+              <li>
+                <strong>Discovery and Sharing</strong>
+                <p>Search records and surface popular notes through like and interaction signals.</p>
+              </li>
+              <li>
+                <strong>Annual Review</strong>
+                <p>Generate yearly summaries from user watch history and behavior data.</p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="card reveal case-section" id="screens" data-step="04">
+            <h2>Interface Snapshots</h2>
+            <figure class="architecture-figure">
+              <img src="./streamlog-home.png" alt="Streamlog homepage interface." />
+              <figcaption>Homepage and primary navigation flow.</figcaption>
+            </figure>
+            <figure class="architecture-figure">
+              <img src="./streamlog-favorite.png" alt="Streamlog favorite feature interface." />
+              <figcaption>Movie favorite feature and interaction view.</figcaption>
+            </figure>
+            <figure class="architecture-figure">
+              <img src="./streamlog-visualization.png" alt="Streamlog annual visualization dashboard." />
+              <figcaption>Annual review visualization and summary analytics output.</figcaption>
+            </figure>
+          </section>
+
+          <section class="card reveal case-section" id="contribution" data-step="05">
+            <h2>My Contribution: Annual Review Analytics</h2>
+            <p>
+              I implemented the annual review feature, which aggregates a user's watch logs by year and turns them into
+              clear summary metrics and visualized trends.
+            </p>
+            <p>
+              The report highlights total watched movies, most-watched genres, total watch time, and average rating.
+              For example, for one yearly query the output showed 42 watched movies, about 1200 total minutes, and a
+              4.2/5 average rating.
+            </p>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer container">
+      <p>&copy; <span id="year"></span> Shuo Huang. All rights reserved.</p>
+    </footer>
+
+    <script src="../script.js"></script>
+  </body>
+</html>
